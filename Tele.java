@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 import java.util.concurrent.locks.Lock;
 
@@ -41,20 +42,17 @@ public class Tele extends LinearOpMode {
         while (opModeIsActive()) {
 
             //Robot directionals
-            double movement = gamepad1.left_stick_y;
-            double turning = -gamepad1.right_stick_x;
+            double leftPower;
+            double rightPower;
 
-            double left = movement + turning;
-            double right = movement - turning;
+            double drive = -gamepad1.left_stick_y;
+            double turn  =  gamepad1.right_stick_x;
+            leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
+            rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
 
-            double max = Math.max(Math.abs(left), Math.abs(right));
-            if (max > 1.0) {
-                left /= max;
-                right /= max;
+            robot.Left.setPower(leftPower);
+            robot.Right.setPower(rightPower);
             }
-
-            robot.Left.setPower(left);
-            robot.Right.setPower(right);
 
             //Gamepad button example
             if ((gamepad1.a && !pressinga)) {
@@ -68,5 +66,4 @@ public class Tele extends LinearOpMode {
         }
 
     }
-
-}
+    
