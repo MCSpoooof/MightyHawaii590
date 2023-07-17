@@ -39,6 +39,8 @@ public class Tele extends LinearOpMode {
         //Booleans to ensure that buttons are only counted once when pressed
         boolean pressingA = false;
 
+        boolean gamepadA = false;
+
         while (opModeIsActive()) {
 
             //Robot directionals
@@ -55,8 +57,6 @@ public class Tele extends LinearOpMode {
 
 
             //Gamepad buttons
-
-            boolean gamepadA = false;
 
             if ((gamepad1.a && !pressingA && gamepadA == false)) {
                 robot.Lock.setPosition(0.7);
