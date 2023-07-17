@@ -59,7 +59,7 @@ public class Tele extends LinearOpMode {
             boolean gamepadA = false;
 
             if ((gamepad1.a && !pressinga && gamepadA == false)) {
-                robot.Lock.setPosition(0.5);
+                robot.Lock.setPosition(0.7);
                 gamepadA = true;
             } else if ((gamepad1.a && !pressinga && gamepadA == true)) {
                 robot.Lock.setPosition(0);
