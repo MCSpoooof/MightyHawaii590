@@ -37,7 +37,7 @@ public class Tele extends LinearOpMode {
         waitForStart();
 
         //Booleans to ensure that buttons are only counted once when pressed
-        boolean pressinga = false;
+        boolean pressingA = false;
 
         while (opModeIsActive()) {
 
@@ -58,14 +58,19 @@ public class Tele extends LinearOpMode {
 
             boolean gamepadA = false;
 
-            if ((gamepad1.a && !pressinga && gamepadA == false)) {
+            if ((gamepad1.a && !pressingA && gamepadA == false)) {
                 robot.Lock.setPosition(0.7);
                 gamepadA = true;
-            } else if ((gamepad1.a && !pressinga && gamepadA == true)) {
+                pressingA = true;
+            }
+            else if ((gamepad1.a && !pressingA && gamepadA == true)) {
                 robot.Lock.setPosition(0);
                 gamepadA = false;
+                pressingA = true;
             }
-
+            else if (!gamepad1.a) {
+                pressingA = false;
+            }
         }
 
     }
