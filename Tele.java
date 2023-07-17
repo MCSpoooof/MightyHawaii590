@@ -34,6 +34,12 @@ public class Tele extends LinearOpMode {
 
         Hardware.maxSpeed = 1;
 
+        robot.Lift.setPower(0.1);
+        robot.Lift.setTargetPosition(0);
+        robot.Lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+
         waitForStart();
 
         //Booleans to ensure that buttons are only counted once when pressed
@@ -77,13 +83,13 @@ public class Tele extends LinearOpMode {
 
 
             if ((gamepad1.right_bumper && !pressinglb && gamepadlb == false)) {
-                robot.LeftClaw.setPosition(0.25);
-                robot.RightClaw.setPosition(0.775);
+                robot.LeftClaw.setPosition(0.76);
+                robot.RightClaw.setPosition(0.29);
                 gamepadlb = true;
                 pressinglb = true;
             } else if ((gamepad1.right_bumper && !pressinglb && gamepadlb == true)) {
-                robot.LeftClaw.setPosition(0.1);
-                robot.RightClaw.setPosition(0.95);
+                robot.LeftClaw.setPosition(0.9);
+                robot.RightClaw.setPosition(0.15);
                 gamepadlb = false;
                 pressinglb = true;
             } else if (!gamepad1.right_bumper) {
@@ -92,14 +98,14 @@ public class Tele extends LinearOpMode {
 
             if (((gamepad1.right_trigger > 0.1) && !pressinglt && gamepadlt == false)) {
                 robot.Lift.setTargetPosition(-270);
-                gamepadlb = true;
-                pressinglb = true;
+                gamepadlt = true;
+                pressinglt = true;
             } else if (((gamepad1.right_trigger > 0.1) && !pressinglt && gamepadlt == true)) {
                 robot.Lift.setTargetPosition(0);
-                gamepadlb = false;
-                pressinglb = true;
+                gamepadlt = false;
+                pressinglt = true;
             } else if (!(gamepad1.right_trigger > 0.1)) {
-                pressinglb = false;
+                pressinglt = false;
             }
 
         }

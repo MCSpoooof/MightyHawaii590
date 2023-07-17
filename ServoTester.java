@@ -58,7 +58,7 @@ public class ServoTester extends LinearOpMode {
                 pressingB  = false;
             }
 
-            robot.RightClaw.setPosition(position);
+            robot.LeftClaw.setPosition(position);
             telemetry.addData("position", position);
             telemetry.update();
 
