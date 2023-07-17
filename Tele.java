@@ -1,17 +1,21 @@
-package org.firstinspires.ftc.teamcode.GearsOfFire516;
+package org.firstinspires.ftc.teamcode.MightyHawaii590;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import java.util.concurrent.locks.Lock;
 
 //See Autonomous program for more in depth comments
 @TeleOp(name = "TeleOp")
-public class DemoT extends LinearOpMode {
+public class Tele extends LinearOpMode {
 
 
     private ElapsedTime runtime = new ElapsedTime();
-    DemoHardware robot = DemoHardware.getInstance();
+    Hardware robot = Hardware.getInstance();
 
     public void runOpMode() {
         robot.init(hardwareMap);
@@ -20,14 +24,14 @@ public class DemoT extends LinearOpMode {
         telemetry.update();
 
         //Turn off encoders in case something gets unplugged
-        if (robot.demoWheel1 != null) {
-            robot.demoWheel1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        if (robot.Left != null) {
+            robot.Left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
-        if (robot.demoWheel2 != null) {
-            robot.demoWheel2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        if (robot.Right != null) {
+            robot.Right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
 
-        DemoHardware.maxSpeed = 1;
+        Hardware.maxSpeed = 1;
 
         waitForStart();
 
@@ -49,11 +53,12 @@ public class DemoT extends LinearOpMode {
                 right /= max;
             }
 
-            robot.demoWheel1.setPower(left);
-            robot.demoWheel2.setPower(right);
+            robot.Left.setPower(left);
+            robot.Right.setPower(right);
 
             //Gamepad button example
-            if ((gamepad1.a && !pressinga)){
+            if ((gamepad1.a && !pressinga)) {
+                robot.Lock.setPosition(0.3);
                 //Enter whatever function you want here
                 pressinga = true;
             } else if (!gamepad1.a) {

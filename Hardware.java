@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.GearsOfFire516;
+package org.firstinspires.ftc.teamcode.MightyHawaii590;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
@@ -8,25 +8,27 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 //Establishing your class
-public class DemoHardware {
+public class Hardware {
 
     //Define motors, servos, gyro, sensors
-    public DcMotor demoWheel1;
+    public DcMotor Left;
 
-    public DcMotor demoWheel2;
+    public DcMotor Right;
 
-    public Servo demoServo;
+    public Servo Lock;
 
     public BNO055IMU gyro;
 
     //Control speed of robot easily by changing this variable
     public static double maxSpeed = 1;
 
+
+
     //Create an instance of your hardware class
-    private static DemoHardware myInstance = null;
-    public static DemoHardware getInstance() {
+    private static Hardware myInstance = null;
+    public static Hardware getInstance() {
         if(myInstance == null) {
-            myInstance = new DemoHardware();
+            myInstance = new Hardware();
         }
         return myInstance;
     }
@@ -36,25 +38,25 @@ public class DemoHardware {
 
         //Initialize motor
         try {
-            demoWheel1 = hwMap.get(DcMotor.class, "demoWheel1");
-            demoWheel1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            demoWheel1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            demoWheel1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            demoWheel1.setPower(0);
+            Left = hwMap.get(DcMotor.class, "demoWheel1");
+            Left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            Left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            Left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Left.setPower(0);
         }
         catch(Exception p_exception) {
-            demoWheel1 = null;
+            Left = null;
         }
 
         try {
-            demoWheel2 = hwMap.get(DcMotor.class, "demoWheel2");
-            demoWheel2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            demoWheel2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            demoWheel2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            demoWheel2.setPower(0);
+            Right = hwMap.get(DcMotor.class, "demoWheel2");
+            Right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            Right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            Right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Right.setPower(0);
         }
         catch(Exception p_exception) {
-            demoWheel2 = null;
+            Right = null;
         }
 
         //Initialize gyro
@@ -74,27 +76,27 @@ public class DemoHardware {
 
         //Initialize servo
         try {
-            demoServo = hwMap.get(Servo.class, "demoServo");
+            Lock = hwMap.get(Servo.class, "demoServo");
         } catch(Exception p_exception) {
-            demoServo = null;
+            Lock = null;
         }
 
     }
 
     //Method to setPower to all wheels at once
-    public void setPower(double wheelDemo1, double wheelDemo2) {
-        if (demoWheel1 != null) {
-            demoWheel1.setPower(Range.clip(wheelDemo1, -maxSpeed, maxSpeed));
+    public void setPower(double left, double right) {
+        if (Left != null) {
+            Left.setPower(Range.clip(left, -maxSpeed, maxSpeed));
         }
-        if (demoWheel2 != null) {
-            demoWheel2.setPower(Range.clip(wheelDemo2, -maxSpeed, maxSpeed));
+        if (Right != null) {
+            Right.setPower(Range.clip(right, -maxSpeed, maxSpeed));
         }
     }
 
-    //Method to easily set power to servo
-    public void demoServo(double servoDemo) {
-        if (demoServo != null) {
-            demoServo.setPosition(servoDemo);
+    //Method to easily set position to servo
+    public void setPosition(double servo) {
+        if (Lock != null) {
+            Lock.setPosition(servo);
         }
     }
 

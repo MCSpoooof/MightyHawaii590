@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.GearsOfFire516;
+package org.firstinspires.ftc.teamcode.MightyHawaii590;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,16 +6,16 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 //Classify program as autonomous
-@Autonomous(name = "DemoAuto")
+@Autonomous(name = "Auto")
 
 //Establishing your class
-public class DemoA extends LinearOpMode {
+public class Auto extends LinearOpMode {
 
     //Needed for time based auto
     private ElapsedTime runtime = new ElapsedTime();
 
     //Call on hardware class
-    DemoHardware robot = DemoHardware.getInstance();
+    Hardware robot = Hardware.getInstance();
 
     public void runOpMode() {
         //Initialize Hardware
@@ -50,18 +50,18 @@ public class DemoA extends LinearOpMode {
         robot.setPower(0,0);
 
         //Converting ticks to units (inches)
-        robot.demoWheel1.setTargetPosition((int) Math.round(ticks));
-        robot.demoWheel2.setTargetPosition((int) Math.round(ticks));
+        robot.Left.setTargetPosition((int) Math.round(ticks));
+        robot.Right.setTargetPosition((int) Math.round(ticks));
 
         //Rest encoders to prevent old values from being used
-        robot.demoWheel1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.demoWheel2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //Set speed to robot
         robot.setPower(speedMoving, speedMoving);
 
         //While loop keeps robot moving until it is "near" the target
-        while (opModeIsActive() && (robot.demoWheel1.getCurrentPosition() + 10 < ticks || robot.demoWheel2.getCurrentPosition() - 10 > ticks)) {
+        while (opModeIsActive() && (robot.Left.getCurrentPosition() + 10 < ticks || robot.Right.getCurrentPosition() - 10 > ticks)) {
 
         }
 
@@ -69,8 +69,8 @@ public class DemoA extends LinearOpMode {
         robot.setPower(0,0);
 
         //Wheels set to use encoders
-        robot.demoWheel1.setMode((DcMotor.RunMode.RUN_USING_ENCODER));
-        robot.demoWheel2.setMode((DcMotor.RunMode.RUN_USING_ENCODER));
+        robot.Left.setMode((DcMotor.RunMode.RUN_USING_ENCODER));
+        robot.Right.setMode((DcMotor.RunMode.RUN_USING_ENCODER));
 
     }
 
