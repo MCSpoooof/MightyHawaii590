@@ -46,17 +46,20 @@ public class Tele extends LinearOpMode {
             double rightPower;
 
             double turn = -gamepad1.left_stick_y;
-            double drive  =  gamepad1.right_stick_x;
-            leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-            rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+            double drive = gamepad1.right_stick_x;
+            leftPower = Range.clip(drive + turn, -1.0, 1.0);
+            rightPower = Range.clip(drive - turn, -1.0, 1.0);
 
             robot.Left.setPower(leftPower);
             robot.Right.setPower(rightPower);
-            }
 
-            //Gamepad button example
-            if ((gamepad1.a && !pressinga)) {
-                robot.Lock.setPosition(0.3);
+
+            //Gamepad buttons
+
+            double gamepadA = 1;
+
+            if ((gamepad1.a && !pressinga && gamepadA = 1)) {
+                robot.Lock.setPosition(-0.3);
                 //Enter whatever function you want here
                 pressinga = true;
             } else if (!gamepad1.a) {
@@ -66,4 +69,5 @@ public class Tele extends LinearOpMode {
         }
 
     }
+}
 

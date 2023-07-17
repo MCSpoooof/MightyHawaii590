@@ -22,8 +22,6 @@ public class Hardware {
     //Control speed of robot easily by changing this variable
     public static double maxSpeed = 1;
 
-
-
     //Create an instance of your hardware class
     private static Hardware myInstance = null;
     public static Hardware getInstance() {
