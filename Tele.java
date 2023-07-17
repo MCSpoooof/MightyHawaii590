@@ -38,8 +38,13 @@ public class Tele extends LinearOpMode {
 
         //Booleans to ensure that buttons are only counted once when pressed
         boolean pressingA = false;
-
         boolean gamepadA = false;
+
+        boolean pressinglb = false;
+        boolean gamepadlb = false;
+
+        boolean pressinglt = false;
+        boolean gamepadlt = false;
 
         while (opModeIsActive()) {
 
@@ -59,20 +64,45 @@ public class Tele extends LinearOpMode {
             //Gamepad buttons
 
             if ((gamepad1.a && !pressingA && gamepadA == false)) {
-                robot.Lock.setPosition(0.3);
+                robot.Lock.setPosition(0.75);
                 gamepadA = true;
                 pressingA = true;
-            }
-            else if ((gamepad1.a && !pressingA && gamepadA == true)) {
-                robot.Lock.setPosition(-2);
+            } else if ((gamepad1.a && !pressingA && gamepadA == true)) {
+                robot.Lock.setPosition(0.42);
                 gamepadA = false;
                 pressingA = true;
-            }
-            else if (!gamepad1.a) {
+            } else if (!gamepad1.a) {
                 pressingA = false;
             }
-        }
 
+
+            if ((gamepad1.right_bumper && !pressinglb && gamepadlb == false)) {
+                robot.LeftClaw.setPosition(0.25);
+                robot.RightClaw.setPosition(0.775);
+                gamepadlb = true;
+                pressinglb = true;
+            } else if ((gamepad1.right_bumper && !pressinglb && gamepadlb == true)) {
+                robot.LeftClaw.setPosition(0.1);
+                robot.RightClaw.setPosition(0.95);
+                gamepadlb = false;
+                pressinglb = true;
+            } else if (!gamepad1.right_bumper) {
+                pressinglb = false;
+            }
+
+            if (((gamepad1.right_trigger > 0.1) && !pressinglt && gamepadlt == false)) {
+                robot.Lift.setTargetPosition(-270);
+                gamepadlb = true;
+                pressinglb = true;
+            } else if (((gamepad1.right_trigger > 0.1) && !pressinglt && gamepadlt == true)) {
+                robot.Lift.setTargetPosition(0);
+                gamepadlb = false;
+                pressinglb = true;
+            } else if (!(gamepad1.right_trigger > 0.1)) {
+                pressinglb = false;
+            }
+
+        }
     }
 }
 

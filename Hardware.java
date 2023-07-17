@@ -15,7 +15,16 @@ public class Hardware {
 
     public DcMotor Right;
 
+
+    public DcMotor Lift;
+
     public Servo Lock;
+
+
+    public Servo LeftClaw;
+
+
+    public Servo RightClaw;
 
     public BNO055IMU gyro;
 
@@ -57,6 +66,17 @@ public class Hardware {
             Right = null;
         }
 
+        try {
+            Lift = hwMap.get(DcMotor.class, "Lift");
+            Lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            Lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            Lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Lift.setPower(0);
+        }
+        catch(Exception p_exception) {
+            Left = null;
+        }
+
         //Initialize gyro
         try {
             gyro = hwMap.get(BNO055IMU.class, "gyro");
@@ -77,6 +97,18 @@ public class Hardware {
             Lock = hwMap.get(Servo.class, "Lock");
         } catch(Exception p_exception) {
             Lock = null;
+        }
+
+        try {
+            LeftClaw = hwMap.get(Servo.class, "LeftClaw");
+        } catch(Exception p_exception) {
+            LeftClaw = null;
+        }
+
+        try {
+            RightClaw = hwMap.get(Servo.class, "RightClaw");
+        } catch(Exception p_exception) {
+            RightClaw = null;
         }
 
     }
