@@ -38,7 +38,7 @@ public class Hardware {
 
         //Initialize motor
         try {
-            Left = hwMap.get(DcMotor.class, "demoWheel1");
+            Left = hwMap.get(DcMotor.class, "Left");
             Left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             Left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             Left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -49,7 +49,7 @@ public class Hardware {
         }
 
         try {
-            Right = hwMap.get(DcMotor.class, "demoWheel2");
+            Right = hwMap.get(DcMotor.class, "Right");
             Right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             Right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             Right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -76,7 +76,7 @@ public class Hardware {
 
         //Initialize servo
         try {
-            Lock = hwMap.get(Servo.class, "demoServo");
+            Lock = hwMap.get(Servo.class, "Lock");
         } catch(Exception p_exception) {
             Lock = null;
         }
