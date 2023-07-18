@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.MightyHawaii590;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -15,18 +17,17 @@ public class Hardware {
 
     public DcMotor Right;
 
-
     public DcMotor Lift;
 
     public Servo Lock;
 
-
     public Servo LeftClaw;
-
 
     public Servo RightClaw;
 
-    public BNO055IMU gyro;
+    public BNO055IMU Gyro;
+
+    public RevColorSensorV3 Color;
 
     //Control speed of robot easily by changing this variable
     public static double maxSpeed = 1;
@@ -60,6 +61,7 @@ public class Hardware {
             Right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             Right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             Right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Right.setDirection(DcMotorSimple.Direction.REVERSE);
             Right.setPower(0);
         }
         catch(Exception p_exception) {
@@ -79,17 +81,17 @@ public class Hardware {
 
         //Initialize gyro
         try {
-            gyro = hwMap.get(BNO055IMU.class, "gyro");
+            Gyro = hwMap.get(BNO055IMU.class, "Gyro");
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
             parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
             parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
             parameters.loggingEnabled = true;
-            parameters.loggingTag = "gyro";
+            parameters.loggingTag = "Gyro";
             parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-            gyro.initialize(parameters);
+            Gyro.initialize(parameters);
         }
         catch (Exception p_exception) {
-            gyro = null;
+            Gyro = null;
         }
 
         //Initialize servo
@@ -111,7 +113,12 @@ public class Hardware {
             RightClaw = null;
         }
 
+        try {
+            Color = hwMap.get(RevColorSensorV3.class, "Color");
+        } catch (Exception p_exception) {
+        }
     }
+
 
     //Method to setPower to all wheels at once
     public void setPower(double left, double right) {
