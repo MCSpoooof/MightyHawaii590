@@ -1,20 +1,20 @@
 package org.firstinspires.ftc.teamcode.MightyHawaii590;
 
-import android.graphics.Color;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 //Classify program as autonomous
-@Autonomous(name = "Auto")
+@Autonomous(name = "AutoRight")
 
 //Establishing your class
-public class Auto extends LinearOpMode {
+public class AutoRight extends LinearOpMode {
 
      boolean BlueRed = false;
      boolean foundColor = false;
+
+     String setColor = "blue";
 
     //Needed for time based auto
     private ElapsedTime runtime = new ElapsedTime();
@@ -41,14 +41,42 @@ public class Auto extends LinearOpMode {
 
         waitForStart();
 
-        move(-8,0.5);
-        if foundColor = false {
-           if (robot.Color.red() > ) {
-                move(-150, 0.5);
+        move(-10,0.5);
+        sleep(1000);
+           if (robot.Color.red() > robot.Color.blue() && !foundColor) {
                 foundColor = true;
-            } if else (robot.Color.blue() > ){
-                move(-150, 0.5);
+                setColor = "red";
+
+            } else if (robot.Color.blue() > robot.Color.red() && !foundColor){
                 foundColor = true;
+                setColor = "blue";
+            }
+
+        if (setColor.equals("red")) {
+            move(-147, 1);
+            telemetry.addData("red", "red");
+            runtime.reset();
+            while (runtime.seconds() < 1.2) {
+                robot.setPower(0.5, -0.5);
+            }
+            runtime.reset();
+            move(-60,1);
+                while (runtime.seconds() < 0.5) {
+                    robot.Lift.setPower(0.2);
+            }
+                robot.Lift.setPower(0);
+                sleep(5000);
+        }
+
+        else if (setColor.equals("blue")) {
+            telemetry.addData("blue", "blue");
+            move(-147, 1);
+            runtime.reset();
+                while (runtime.seconds() < 0.5) {
+                    robot.Lift.setPower(0.2);
+                }
+                    robot.Lift.setPower(0);
+                    sleep(5000);
             }
         }
         //Calling on Encoder Based
@@ -92,21 +120,9 @@ public class Auto extends LinearOpMode {
 
         //Reading the color
 
-        if (robot.Color.blue() > robot.Color.red()) {
-            BlueRed = false;
-        }
-        else {
-            BlueRed = true;
-        }
 
         //Time Based
-        /*runtime.reset();
-        while (runtime.seconds() < 3) {
-            robot.setPower(1, 1);
-        }
-        runtime.reset();*/
 
-    }
 
     //Encoder Based
     public void move(double distanceMoving, double speedMoving) {

@@ -34,7 +34,7 @@ public class Tele extends LinearOpMode {
 
         Hardware.maxSpeed = 1;
 
-        robot.Lift.setPower(0.1);
+        robot.Lift.setPower(0.15);
         robot.Lift.setTargetPosition(0);
         robot.Lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -70,11 +70,11 @@ public class Tele extends LinearOpMode {
             //Gamepad buttons
 
             if ((gamepad1.a && !pressingA && gamepadA == false)) {
-                robot.Lock.setPosition(1);
+                robot.Lock.setPosition(0.78);
                 gamepadA = true;
                 pressingA = true;
             } else if ((gamepad1.a && !pressingA && gamepadA == true)) {
-                robot.Lock.setPosition(0.42);
+                robot.Lock.setPosition(0.40);
                 gamepadA = false;
                 pressingA = true;
             } else if (!gamepad1.a) {
@@ -82,7 +82,7 @@ public class Tele extends LinearOpMode {
             }
 
 
-            if ((gamepad1.right_bumper && !pressinglb && gamepadlb == false)) {
+            if ((gamepad1.right_bumper || gamepad1.left_bumper && !pressinglb && gamepadlb == false)) {
                 robot.LeftClaw.setPosition(0.5);
                 robot.RightClaw.setPosition(0.3);
                 gamepadlb = true;

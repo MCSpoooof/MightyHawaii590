@@ -37,11 +37,14 @@ public class ServoTester extends LinearOpMode {
 
         double positionLeft = 0;
         double positionRight = 0;
+        double positionLock = 0;
 
         boolean pressingA = false;
         boolean pressingB = false;
         boolean pressingX = false;
         boolean pressingY = false;
+        boolean pressingLB = false;
+        boolean pressingRB = false;
 
         while (opModeIsActive()) {
 
@@ -84,6 +87,25 @@ public class ServoTester extends LinearOpMode {
 
             robot.RightClaw.setPosition(positionRight);
             telemetry.addData("Right Position", positionRight);
+
+            if (gamepad1.left_bumper && !pressingLB){
+                positionLock += 0.05;
+                pressingLB = true;
+            }
+            else if (!gamepad1.left_bumper) {
+                pressingLB = false;
+            }
+
+            if (gamepad1.right_bumper && !pressingRB){
+                positionLock -= 0.05;
+                pressingRB = true;
+            }
+            else if (!gamepad1.right_bumper) {
+                pressingRB  = false;
+            }
+
+            robot.Lock.setPosition(positionLock);
+            telemetry.addData("Lock", positionLock);
             telemetry.update();
 
         }
